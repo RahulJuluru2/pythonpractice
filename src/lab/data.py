@@ -3,7 +3,7 @@ LAB_TOPICS = {
         "label": "Loops",
         "examples": [
             {
-                "title": "Sum With For",
+                "title": "For Loop Sum",
                 "code": "\n".join(
                     [
                         "numbers = [1, 2, 3, 4, 5]",
@@ -40,9 +40,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Rewrite the loop using a while loop and compare outputs.",
-            "Add a condition to skip values greater than 3.",
-            "Compute the running total and print it each iteration.",
+            "Rewrite one loop using a while loop.",
+            "Add a condition that skips values > 3.",
+            "Compute a running total and print it each iteration.",
         ],
     },
     "functions": {
@@ -123,8 +123,7 @@ LAB_TOPICS = {
                         "",
                         "    @classmethod",
                         "    def from_email(cls, email):",
-                        "        name = email.split('@')[0]",
-                        "        return cls(name)",
+                        "        return cls(email.split('@')[0])",
                         "",
                         "print(User.from_email('ava@example.com').name)",
                     ]
@@ -148,9 +147,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Add a `reset` method that sets the counter back to zero.",
-            "Make `Counter` support `len(counter)` using `__len__`.",
-            "Add a `__repr__` to show the current value.",
+            "Add a reset method that sets the counter to zero.",
+            "Make Counter support len(counter) using __len__.",
+            "Add a __repr__ that shows the current value.",
         ],
     },
     "comprehensions": {
@@ -187,9 +186,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Create a dict comprehension that maps values to their cubes.",
+            "Create a dict comprehension that maps values to cubes.",
             "Use a nested comprehension to make a 3x3 matrix.",
-            "Convert `pairs` into a set of formatted strings.",
+            "Convert pairs into a set of formatted strings.",
         ],
     },
     "generators": {
@@ -230,9 +229,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Turn `countdown` into an infinite generator with a limit in the caller.",
+            "Turn countdown into an infinite generator with a caller limit.",
             "Write a generator that yields squares until they exceed 100.",
-            "Use `yield from` to compose generators.",
+            "Use yield from to compose generators.",
         ],
     },
     "decorators": {
@@ -303,9 +302,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Preserve wrapped function metadata with `functools.wraps`.",
+            "Preserve wrapped metadata with functools.wraps.",
             "Write a decorator that retries a function 3 times on error.",
-            "Measure both runtime and return value size.",
+            "Measure runtime and return value size.",
         ],
     },
     "context_managers": {
@@ -363,7 +362,7 @@ LAB_TOPICS = {
         "prompts": [
             "Add error handling that prints exceptions before re-raising.",
             "Create a context manager that times a block.",
-            "Chain two context managers together in a single `with`.",
+            "Chain two context managers together in one with.",
         ],
     },
     "data_classes": {
@@ -422,9 +421,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Add an ordering and compare two players.",
-            "Make `score` computed from tags length.",
-            "Add a `__post_init__` validation.",
+            "Add ordering and compare two players.",
+            "Make score computed from tags length.",
+            "Add a __post_init__ validation.",
         ],
     },
     "iterators": {
@@ -483,14 +482,14 @@ LAB_TOPICS = {
         "prompts": [
             "Make the iterator restartable by returning a new iterator.",
             "Support iteration over only odd numbers.",
-            "Add a `take(n)` helper that returns a list.",
+            "Add a take(n) helper that returns a list.",
         ],
     },
     "error_handling": {
         "label": "Error Handling",
         "examples": [
             {
-                "title": "Try/Except/Finally",
+                "title": "Try / Except / Finally",
                 "code": "\n".join(
                     [
                         "def safe_divide(a, b):",
@@ -524,7 +523,7 @@ LAB_TOPICS = {
                 ),
             },
             {
-                "title": "Try/Else",
+                "title": "Try / Else",
                 "code": "\n".join(
                     [
                         "def parse_int(text):",
@@ -544,7 +543,7 @@ LAB_TOPICS = {
         "prompts": [
             "Raise a custom exception for invalid input.",
             "Log errors with stack traces.",
-            "Use `else` to handle the success path cleanly.",
+            "Use else to handle the success path cleanly.",
         ],
     },
     "typing_protocols": {
@@ -612,9 +611,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Add a second protocol with `read` and `write` methods.",
+            "Add a second protocol with read/write methods.",
             "Implement the protocol with a file-like object.",
-            "Use `typing.runtime_checkable` to validate at runtime.",
+            "Use runtime_checkable to validate at runtime.",
         ],
     },
     "async_await": {
@@ -679,9 +678,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Add a timeout to each fetch using `asyncio.wait_for`.",
+            "Add a timeout to each fetch using asyncio.wait_for.",
             "Limit concurrency with a semaphore.",
-            "Gather results as they complete with `asyncio.as_completed`.",
+            "Gather results as they complete with asyncio.as_completed.",
         ],
     },
     "asyncio_streams": {
@@ -705,7 +704,7 @@ LAB_TOPICS = {
                         "    host, port = server.sockets[0].getsockname()",
                         "",
                         "    reader, writer = await asyncio.open_connection(host, port)",
-                        "    writer.write(b'ping\\n')",
+                        "    writer.write(b'ping\n')",
                         "    await writer.drain()",
                         "    response = await reader.readline()",
                         "    print(response.decode().strip())",
@@ -727,7 +726,7 @@ LAB_TOPICS = {
                         "",
                         "async def main():",
                         "    reader = asyncio.StreamReader()",
-                        "    reader.feed_data(b'line1\\nline2\\n')",
+                        "    reader.feed_data(b'line1\nline2\n')",
                         "    reader.feed_eof()",
                         "",
                         "    print((await reader.readline()).decode().strip())",
@@ -755,8 +754,8 @@ LAB_TOPICS = {
                         "    server = await asyncio.start_server(handle, '127.0.0.1', 0)",
                         "    host, port = server.sockets[0].getsockname()",
                         "    reader, writer = await asyncio.open_connection(host, port)",
-                        "    writer.write(b'hello\\n')",
-                        "    writer.write(b'world\\n')",
+                        "    writer.write(b'hello\n')",
+                        "    writer.write(b'world\n')",
                         "    await writer.drain()",
                         "    print((await reader.readline()).decode().strip())",
                         "    print((await reader.readline()).decode().strip())",
@@ -1007,8 +1006,8 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Auto-add a `created_at` attribute to classes.",
-            "Enforce that subclasses implement a `run` method.",
+            "Auto-add a created_at attribute to classes.",
+            "Enforce that subclasses implement a run method.",
             "Track class creation order and print it.",
         ],
     },
@@ -1083,7 +1082,7 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Require a `name` class attribute to be defined.",
+            "Require a name class attribute to be defined.",
             "Allow abstract base classes without validation.",
             "Collect violations and raise a single error message.",
         ],
@@ -1132,9 +1131,9 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Use `functools.singledispatch` to overload a function.",
+            "Use functools.singledispatch to overload a function.",
             "Write a decorator factory that takes a label.",
-            "Use `reduce` to compute a product.",
+            "Use reduce to compute a product.",
         ],
     },
     "itertools": {
@@ -1178,8 +1177,8 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Use `groupby` to group consecutive values.",
-            "Make a sliding window with `islice`.",
+            "Use groupby to group consecutive values.",
+            "Make a sliding window with islice.",
             "Generate permutations of length 2 from a list.",
         ],
     },
@@ -1240,8 +1239,8 @@ LAB_TOPICS = {
             },
         ],
         "prompts": [
-            "Make `chunked` yield tuples instead of lists.",
-            "Implement `roundrobin` from the itertools docs.",
+            "Make chunked yield tuples instead of lists.",
+            "Implement roundrobin from the itertools docs.",
             "Build a windowed iterator with overlap size 2.",
         ],
     },

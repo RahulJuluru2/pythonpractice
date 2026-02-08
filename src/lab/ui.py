@@ -285,7 +285,7 @@ def lab_html() -> str:
       }
 
       function persistCurrent() {
-        if (state.currentTopic === null) return;
+        if (!state.currentTopic) return;
         localStorage.setItem(
           storageKey(state.currentTopic, state.currentExample),
           code.value
@@ -337,7 +337,10 @@ def lab_html() -> str:
           examples.appendChild(btn);
         });
         const lastExample = Number(localStorage.getItem("py-lab-last-example") || 0);
-        setExample(topicName, Number.isFinite(lastExample) ? lastExample : 0);
+        const safeIndex = Number.isFinite(lastExample)
+          ? Math.min(lastExample, exampleList.length - 1)
+          : 0;
+        setExample(topicName, safeIndex >= 0 ? safeIndex : 0);
       }
 
       function renderTopics(topicName) {
@@ -352,13 +355,19 @@ def lab_html() -> str:
       }
 
       async function loadData() {
-        const response = await fetch("/lab-data");
-        state.topics = await response.json();
-        const lastTopic = localStorage.getItem("py-lab-last-topic");
-        const fallback = Object.keys(state.topics)[0];
-        state.currentTopic = lastTopic && state.topics[lastTopic] ? lastTopic : fallback;
-        renderTopics(state.currentTopic);
-        renderExamples(state.currentTopic);
+        try {
+          const response = await fetch("/lab-data");
+          if (!response.ok) throw new Error("Failed to load topics");
+          state.topics = await response.json();
+          const lastTopic = localStorage.getItem("py-lab-last-topic");
+          const fallback = Object.keys(state.topics)[0];
+          state.currentTopic =
+            lastTopic && state.topics[lastTopic] ? lastTopic : fallback;
+          renderTopics(state.currentTopic);
+          renderExamples(state.currentTopic);
+        } catch (error) {
+          output.textContent = "Failed to load lab data.";
+        }
       }
 
       topic.addEventListener("change", () => {
@@ -367,7 +376,8 @@ def lab_html() -> str:
         renderExamples(state.currentTopic);
       });
       reset.addEventListener("click", () => {
-        const example = state.topics[state.currentTopic].examples[state.currentExample];
+        const example =
+          state.topics[state.currentTopic].examples[state.currentExample];
         code.value = example.code;
         persistCurrent();
       });
