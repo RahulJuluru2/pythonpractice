@@ -15,7 +15,7 @@ class RunRequest(BaseModel):
 
 @router.get("/lab", response_class=HTMLResponse)
 def lab():
-    return lab_html()
+    return lab_html(LAB_TOPICS)
 
 
 @router.get("/lab-data")
